@@ -280,7 +280,7 @@ def to_float_list(thelist):
     Parameter thelist: The list of strings to convert
     Precondition: The elements of the list can be converted to floats
     """
-    return None  # Stub
+    return [float(i) for i in thelist]
 
 
 def file_to_data(filename):
@@ -318,9 +318,21 @@ def file_to_data(filename):
     """
     # RULE: We want you to use a for-loop to convert the last three rows to float lists
     # HINT: Use to_float_list
-    return None  # Stub
-
-
+    data = []
+    boo = True
+    with open(filename, 'r') as f:
+        d = f.readlines()
+        for i in d:
+            if boo == True:
+                data.append(i.strip())
+                boo = False
+            else:
+                k = i.rstrip().split(",")
+                data.append([float(i) for i in k]) 
+    f.close()
+    return data
+    
+    
 def files_to_dictionary(files):
     """
     Returns the data dictionary for a list of file names.
@@ -339,10 +351,11 @@ def files_to_dictionary(files):
     Precondition: files is a list of names of DAT files
     """
     # HINT: Use file_to_data
-    return None  # Stub
-
-
-
+    dictionary = {}
+    for filenames in files:
+        data = file_to_data(filenames)
+        dictionary[data[0]] = [data[1],data[2],data[3]]
+    return dictionary
 
 # PROVIDED FUNCTIONS (DO NOT TOUCH)
 def components_to_num(coeffs, rgb):
