@@ -86,7 +86,10 @@ def test_str5_color():
                               a2.str5_cmyk(introcs.CMYK(98.448, 25.362, 72.8, 1.0)))
 
     # Tests for str5_hsv (add two)
-
+    introcs.assert_equals('(0.000, 1.000, 0.500)',
+                              a2.str5_hsv(introcs.HSV(0.0, 1.0, 0.5)))
+    introcs.assert_equals('(0.000, 0.314, 1.000)', 
+                          a2.str5_hsv(introcs.HSV(0.0,0.313725490196,1.0)))
 
 def test_rgb_to_cmyk():
     """

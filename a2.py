@@ -4,8 +4,8 @@ Functions for Assignment A2
 This file contains the functions for the assignment.  You should replace the stubs
 with your own implementations.
 
-YOUR NAME(S) AND NETID(S) HERE
-DATE COMPLETED HERE
+Oscar So (ons4) & Jee-In Lee (jl3697)
+Sep 30, 2019
 """
 import introcs
 import math
@@ -18,8 +18,7 @@ def complement_rgb(rgb):
     Parameter rgb: the color to complement
     Precondition: rgb is an RGB object
     """
-    # THIS IS WRONG.  FIX IT
-    return introcs.RGB(rgb.red, rgb.green, rgb.blue)
+    return introcs.RGB(255-rgb.red, 255-rgb.green, 255-rgb.blue)
 
 
 def round(number, places):
@@ -50,7 +49,12 @@ def round(number, places):
     #   4. Shift the number back "to the right" the same amount that you did to the left.
     #      Suppose that in step 1 you converted 100.556 to 1005.56.  In this case,
     #      divide the number by 10 to put it back.
-    return 0.0    # Stub
+    multiplier = 10**places
+    multiplied = float(multiplier) * number
+    plus_half = multiplied + 0.5
+    int_conversion = int(plus_half)
+    final_value = float(int_conversion) / multiplier
+    return final_value
 
 
 def str5(value):
@@ -73,7 +77,13 @@ def str5(value):
     # Note:Obviously, you want to use the function round() that you just defined.
     # However, remember that the rounding takes place at a different place depending
     # on how big value is. Look at the examples in the specification.
-    return ''    # Stub
+    string = str(value) + "."
+    dot_index = string.index('.')
+    rounded = round (float(value) , (5 - (dot_index + 1)))
+    rounded_string = str(rounded)
+    while (len(rounded_string) != 5):
+        rounded_string = rounded_string + "0";
+    return rounded_string
 
 
 def str5_cmyk(cmyk):
@@ -93,8 +103,8 @@ def str5_cmyk(cmyk):
     Parameter cmtk: the color to convert to a string
     Precondition: cmyk is an CMYK object.
     """
-    return ''    # Stub
-
+    return "(" + str5(cmyk.cyan) + ", " + str5(cmyk.magenta) + \
+        ", " + str5(cmyk.yellow) + ", " + str5(cmyk.black) + ")"
 
 def str5_hsv(hsv):
     """
@@ -113,7 +123,8 @@ def str5_hsv(hsv):
     Parameter hsv: the color to convert to a string
     Precondition: hsv is an HSV object.
     """
-    return ''    # Stub
+    return "(" + str5(hsv.hue) + ", " + str5(hsv.saturation) + \
+        ", " + str5(hsv.value) + ")"
 
 
 def rgb_to_cmyk(rgb):
@@ -127,7 +138,21 @@ def rgb_to_cmyk(rgb):
     """
     # The RGB numbers are in the range 0..255.
     # Change the RGB numbers to the range 0..1 by dividing them by 255.0.
-    return None  # Stub
+    
+    R = (rgb.red/255.0)
+    G = (rgb.green/255.0)
+    B = (rgb.blue/255.0)
+    Cyan = 1 - R
+    Magenta = 1 - G
+    Yellow = 1 - B
+    if Cyan == 1 and Magenta == 1 and Yellow == 1:
+        return introcs.CMYK(0.0,0.0,0.0,100.0)
+    else:
+        K = min(Cyan,Magenta,Yellow)
+        C = ((Cyan-K)/(1-K))*100.0
+        M = ((Magenta-K)/(1-K))*100.0
+        Y = ((Yellow-K)/(1-K))*100.0
+        return introcs.CMYK(C,M,Y,K*100.0)
 
 
 def cmyk_to_rgb(cmyk):
@@ -141,7 +166,18 @@ def cmyk_to_rgb(cmyk):
     """
     # The CMYK numbers are in the range 0.0..100.0.  Deal with them in the
     # same way as the RGB numbers in rgb_to_cmyk()
-    return None  # Stub
+    C = (cmyk.cyan/100.0)
+    M = (cmyk.magenta/100.0)
+    Y = (cmyk.yellow/100.0)
+    K = (cmyk.black/100.0)
+   
+    R = (1 - C)*(1 - K)
+    G = (1 - M)*(1 - K)
+    B = (1 - Y)*(1 - K)
+
+    rgb = introcs.RGB(int(str5(R*255)),int(str5(G*255)),int(str5(B*255)))
+    
+    return rgb
 
 
 def rgb_to_hsv(rgb):
@@ -155,7 +191,35 @@ def rgb_to_hsv(rgb):
     """
     # The RGB numbers are in the range 0..255.
     # Change them to range 0..1 by dividing them by 255.0.
-    return None  # Stub
+    
+    r = rgb.red/255.0
+    g = rgb.green/255.0
+    b = rgb.blue/255.0
+    min_comparison =min(r,g,b)
+    max_comparison =max(r,g,b)
+
+    value = max_comparison
+
+    if max_comparison == min_comparison:
+        hue = 0
+    elif max_comparison == r and g >= b:
+        hue = (60.0 * (g - b)) / (max_comparison - min_comparison)
+    elif max_comparison == r and b >= g:
+        hue = (60.0 * (g - b)) / (max_comparison - min_comparison) + 360.0
+    elif max_comparison == g:
+        hue = (60.0 * (b - r)) / (max_comparison - min_comparison) + 120.0
+    else:
+        hue = (60.0 * (r - g)) / (max_comparison - min_comparison) + 240.0
+   
+    if max_comparison == 0:
+        saturation = 0
+    else:
+        saturation = (max_comparison-min_comparison)/max_comparison
+      
+    hsv = introcs.HSV (hue, saturation, value)
+    
+    return hsv
+
 
 
 def hsv_to_rgb(hsv):
@@ -167,8 +231,43 @@ def hsv_to_rgb(hsv):
     Parameter hsv: the color to convert to a RGB object
     Precondition: hsv is an HSV object.
     """
-    return None  # Stub
+    init_hue = hsv.hue
+    init_saturation = hsv.saturation
+    init_value = hsv.value
+    Hi = math.floor(init_hue/60)
+    f = init_hue/60 - Hi
+    p = init_value * (1- init_saturation)
+    q = init_value * (1- f * init_saturation)
+    t = init_value * (1- (1-f) * init_saturation)
 
+    if Hi == 0:
+        R = init_value
+        G = t
+        B = p
+    elif Hi == 1:
+        R = q
+        G = init_value
+        B = p
+    elif Hi == 2:
+        R = p
+        G = init_value
+        B = t
+    elif Hi == 3:
+        R = p
+        G = q
+        B = init_value
+    elif Hi == 4:
+        R = t
+        G = p
+        B = init_value
+    elif Hi == 5:
+        R = init_value
+        G = p
+        B = q
+   
+    rgb = introcs.RGB(int(str5(R*255)), int(str5(G*255)), int(str5(B*255)))
+   
+    return rgb
 
 # COLOR BLIND FILE SUPPORT
 
