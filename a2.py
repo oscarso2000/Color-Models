@@ -175,7 +175,7 @@ def cmyk_to_rgb(cmyk):
     G = (1 - M)*(1 - K)
     B = (1 - Y)*(1 - K)
 
-    rgb = introcs.RGB(int(str5(R*255)),int(str5(G*255)),int(str5(B*255)))
+    rgb = introcs.RGB(int(round(R*255,0)),int(round(G*255,0)),int(round(B*255,0)))
     
     return rgb
 
@@ -265,7 +265,7 @@ def hsv_to_rgb(hsv):
         G = p
         B = q
    
-    rgb = introcs.RGB(int(str5(R*255)), int(str5(G*255)), int(str5(B*255)))
+    rgb = introcs.RGB(int(round(R*255,0)), int(round(G*255,0)), int(round(B*255,0)))
    
     return rgb
 
