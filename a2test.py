@@ -10,6 +10,7 @@ DATE COMPLETED HERE
 import introcs
 import a2
 
+
 def test_complement():
     """
     Test function complement
@@ -20,35 +21,35 @@ def test_complement():
                           a2.complement_rgb(introcs.RGB(92, 128, 255)))
 
     # Make sure we are not modifying the color
-    rgb = introcs.RGB(128,128,128)
-    introcs.assert_not_equals(id(rgb),id(a2.complement_rgb(rgb)))
+    rgb = introcs.RGB(128, 128, 128)
+    introcs.assert_not_equals(id(rgb), id(a2.complement_rgb(rgb)))
 
 
 def test_round():
     """
     Test function round (a2 version)
     """
-    introcs.assert_equals(130.6,   a2.round(130.59,1))
-    introcs.assert_equals(130.5,   a2.round(130.54,1))
-    introcs.assert_equals(100.0,   a2.round(100,1))
-    introcs.assert_equals(100.6,   a2.round(100.55,1))
-    introcs.assert_equals(99.57,   a2.round(99.566,2))
-    introcs.assert_equals(99.99,   a2.round(99.99,2))
-    introcs.assert_equals(100.00,  a2.round(99.995,2))
-    introcs.assert_equals(22.00,   a2.round(21.99575,2))
-    introcs.assert_equals(21.99,   a2.round(21.994,2))
-    introcs.assert_equals(10.01,   a2.round(10.013567,2))
-    introcs.assert_equals(10.00,   a2.round(10.000000005,2))
-    introcs.assert_equals(10.00,   a2.round(9.9999,3))
-    introcs.assert_equals(9.999,   a2.round(9.9993,3))
-    introcs.assert_equals(1.355,   a2.round(1.3546,3))
-    introcs.assert_equals(1.354,   a2.round(1.3544,3))
-    introcs.assert_equals(0.046,   a2.round(.0456,3))
-    introcs.assert_equals(0.045,   a2.round(.0453,3))
-    introcs.assert_equals(0.006,   a2.round(.0056,3))
-    introcs.assert_equals(0.001,   a2.round(.0013,3))
-    introcs.assert_equals(0.000,   a2.round(.0004,3))
-    introcs.assert_equals(0.001,   a2.round(.0009999,3))
+    introcs.assert_equals(130.6,   a2.round(130.59, 1))
+    introcs.assert_equals(130.5,   a2.round(130.54, 1))
+    introcs.assert_equals(100.0,   a2.round(100, 1))
+    introcs.assert_equals(100.6,   a2.round(100.55, 1))
+    introcs.assert_equals(99.57,   a2.round(99.566, 2))
+    introcs.assert_equals(99.99,   a2.round(99.99, 2))
+    introcs.assert_equals(100.00,  a2.round(99.995, 2))
+    introcs.assert_equals(22.00,   a2.round(21.99575, 2))
+    introcs.assert_equals(21.99,   a2.round(21.994, 2))
+    introcs.assert_equals(10.01,   a2.round(10.013567, 2))
+    introcs.assert_equals(10.00,   a2.round(10.000000005, 2))
+    introcs.assert_equals(10.00,   a2.round(9.9999, 3))
+    introcs.assert_equals(9.999,   a2.round(9.9993, 3))
+    introcs.assert_equals(1.355,   a2.round(1.3546, 3))
+    introcs.assert_equals(1.354,   a2.round(1.3544, 3))
+    introcs.assert_equals(0.046,   a2.round(.0456, 3))
+    introcs.assert_equals(0.045,   a2.round(.0453, 3))
+    introcs.assert_equals(0.006,   a2.round(.0056, 3))
+    introcs.assert_equals(0.001,   a2.round(.0013, 3))
+    introcs.assert_equals(0.000,   a2.round(.0004, 3))
+    introcs.assert_equals(0.001,   a2.round(.0009999, 3))
 
 
 def test_str5():
@@ -76,6 +77,10 @@ def test_str5():
     introcs.assert_equals('0.001',  a2.str5(.0013))
     introcs.assert_equals('0.000',  a2.str5(.0004))
     introcs.assert_equals('0.001',  a2.str5(.0009999))
+    introcs.assert_equals('1.000',  a2.str5(1))
+    introcs.assert_equals('0.000',  a2.str5(0))
+    introcs.assert_equals('360.0',  a2.str5(360))
+    introcs.assert_equals('78.00',  a2.str5(78))
 
 
 def test_str5_color():
@@ -83,13 +88,20 @@ def test_str5_color():
     Test the str5 functions for cmyk and hsv.
     """
     introcs.assert_equals('(98.45, 25.36, 72.80, 1.000)',
-                              a2.str5_cmyk(introcs.CMYK(98.448, 25.362, 72.8, 1.0)))
+                          a2.str5_cmyk(introcs.CMYK(98.448, 25.362, 72.8, 1.0)))
+    introcs.assert_equals('(76.86, 0.000, 9.429, 100.0)',
+                          a2.str5_cmyk(introcs.CMYK(76.858, 0.000, 9.42885, 100.0)))
 
     # Tests for str5_hsv (add two)
     introcs.assert_equals('(0.000, 1.000, 0.500)',
-                              a2.str5_hsv(introcs.HSV(0.0, 1.0, 0.5)))
-    introcs.assert_equals('(0.000, 0.314, 1.000)', 
-                          a2.str5_hsv(introcs.HSV(0.0,0.313725490196,1.0)))
+                          a2.str5_hsv(introcs.HSV(0.0, 1.0, 0.5)))
+    introcs.assert_equals('(0.000, 0.314, 1.000)',
+                          a2.str5_hsv(introcs.HSV(0.0, 0.313725490196, 1.0)))
+    introcs.assert_equals('(12.00, 0.468, 0.325)',
+                          a2.str5_hsv(introcs.HSV(12, 0.46792, 0.32456)))
+    introcs.assert_equals('(225.3, 0.151, 0.786)',
+                          a2.str5_hsv(introcs.HSV(225.298, 0.1512256, 0.78610)))
+
 
 def test_rgb_to_cmyk():
     """
@@ -116,26 +128,40 @@ def test_rgb_to_cmyk():
     introcs.assert_equals('24.42', a2.str5(cmyk.yellow))
     introcs.assert_equals('14.90', a2.str5(cmyk.black))
 
+    rgb = introcs.RGB(0, 165, 39)
+    cmyk = a2.rgb_to_cmyk(rgb)
+    introcs.assert_equals('100.0', a2.str5(cmyk.cyan))
+    introcs.assert_equals('0.000', a2.str5(cmyk.magenta))
+    introcs.assert_equals('76.36', a2.str5(cmyk.yellow))
+    introcs.assert_equals('35.29', a2.str5(cmyk.black))
+
+    rgb = introcs.RGB(23, 66, 188)
+    cmyk = a2.rgb_to_cmyk(rgb)
+    introcs.assert_equals('87.77', a2.str5(cmyk.cyan))
+    introcs.assert_equals('64.89', a2.str5(cmyk.magenta))
+    introcs.assert_equals('0.000', a2.str5(cmyk.yellow))
+    introcs.assert_equals('26.27', a2.str5(cmyk.black))
+    
 
 def test_cmyk_to_rgb():
     """
     Test translation function cmyk_to_rgb
     """
-    pass # ADD TESTS TO ME
+    pass  # ADD TESTS TO ME
 
 
 def test_rgb_to_hsv():
     """
     Test translation function rgb_to_hsv
     """
-    pass # ADD TESTS TO ME
+    pass  # ADD TESTS TO ME
 
 
 def test_hsv_to_rgb():
     """
     Test translation function hsv_to_rgb
     """
-    pass # ADD TESTS TO ME
+    pass  # ADD TESTS TO ME
 
 
 def test_to_float_list():
@@ -167,35 +193,35 @@ def test_file_to_data():
     """
     file = 'colorblind/normal.dat'
     data = a2.file_to_data(file)
-    introcs.assert_equals('Normal',data[0])
-    introcs.assert_float_lists_equal([1,0,0],data[1])
-    introcs.assert_float_lists_equal([0,1,0],data[2])
-    introcs.assert_float_lists_equal([0,0,1],data[3])
+    introcs.assert_equals('Normal', data[0])
+    introcs.assert_float_lists_equal([1, 0, 0], data[1])
+    introcs.assert_float_lists_equal([0, 1, 0], data[2])
+    introcs.assert_float_lists_equal([0, 0, 1], data[3])
 
     file = 'colorblind/tritanomaly.dat'
     data = a2.file_to_data(file)
-    introcs.assert_equals('Tritanomaly',data[0])
-    introcs.assert_float_lists_equal([0.967, 0.033, 0],data[1])
-    introcs.assert_float_lists_equal([0, 0.733, 0.267],data[2])
-    introcs.assert_float_lists_equal([0, 0.183, 0.817],data[3])
+    introcs.assert_equals('Tritanomaly', data[0])
+    introcs.assert_float_lists_equal([0.967, 0.033, 0], data[1])
+    introcs.assert_float_lists_equal([0, 0.733, 0.267], data[2])
+    introcs.assert_float_lists_equal([0, 0.183, 0.817], data[3])
 
 
 def test_files_to_dictionary():
     """
     Test loading function files_to_dictionary
     """
-    files = ['colorblind/normal.dat','colorblind/tritanomaly.dat']
+    files = ['colorblind/normal.dat', 'colorblind/tritanomaly.dat']
     maps = a2.files_to_dictionary(files)
 
-    introcs.assert_equals(2,len(maps))
+    introcs.assert_equals(2, len(maps))
     introcs.assert_true('Normal' in maps)
     introcs.assert_true('Tritanomaly' in maps)
-    introcs.assert_float_lists_equal([1,0,0],maps['Normal'][0])
-    introcs.assert_float_lists_equal([0,1,0],maps['Normal'][1])
-    introcs.assert_float_lists_equal([0,0,1],maps['Normal'][2])
-    introcs.assert_float_lists_equal([0.967, 0.033, 0],maps['Tritanomaly'][0])
-    introcs.assert_float_lists_equal([0, 0.733, 0.267],maps['Tritanomaly'][1])
-    introcs.assert_float_lists_equal([0, 0.183, 0.817],maps['Tritanomaly'][2])
+    introcs.assert_float_lists_equal([1, 0, 0], maps['Normal'][0])
+    introcs.assert_float_lists_equal([0, 1, 0], maps['Normal'][1])
+    introcs.assert_float_lists_equal([0, 0, 1], maps['Normal'][2])
+    introcs.assert_float_lists_equal([0.967, 0.033, 0], maps['Tritanomaly'][0])
+    introcs.assert_float_lists_equal([0, 0.733, 0.267], maps['Tritanomaly'][1])
+    introcs.assert_float_lists_equal([0, 0.183, 0.817], maps['Tritanomaly'][2])
 
 
 # Script Code
