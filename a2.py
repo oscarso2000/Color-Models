@@ -106,6 +106,7 @@ def str5_cmyk(cmyk):
     return "(" + str5(cmyk.cyan) + ", " + str5(cmyk.magenta) + \
         ", " + str5(cmyk.yellow) + ", " + str5(cmyk.black) + ")"
 
+
 def str5_hsv(hsv):
     """
     Returns: String representation of hsv in the form "(H, S, V)".
@@ -176,7 +177,6 @@ def cmyk_to_rgb(cmyk):
     B = (1 - Y)*(1 - K)
 
     rgb = introcs.RGB(int(round(R*255,0)),int(round(G*255,0)),int(round(B*255,0)))
-    
     return rgb
 
 
@@ -216,10 +216,8 @@ def rgb_to_hsv(rgb):
     else:
         saturation = (max_comparison-min_comparison)/max_comparison
       
-    hsv = introcs.HSV (hue, saturation, value)
-    
+    hsv = introcs.HSV (hue, saturation, value)   
     return hsv
-
 
 
 def hsv_to_rgb(hsv):
@@ -266,11 +264,10 @@ def hsv_to_rgb(hsv):
         B = q
    
     rgb = introcs.RGB(int(round(R*255,0)), int(round(G*255,0)), int(round(B*255,0)))
-   
     return rgb
 
-# COLOR BLIND FILE SUPPORT
 
+# COLOR BLIND FILE SUPPORT
 def to_float_list(thelist):
     """
     Returns a copy of the old list, with all values cast to floats
@@ -356,6 +353,7 @@ def files_to_dictionary(files):
         data = file_to_data(filenames)
         dictionary[data[0]] = [data[1],data[2],data[3]]
     return dictionary
+
 
 # PROVIDED FUNCTIONS (DO NOT TOUCH)
 def components_to_num(coeffs, rgb):

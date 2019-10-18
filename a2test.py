@@ -4,8 +4,8 @@ Unit Test for Assignment A2
 This module implements several test cases for a2.  It is incomplete.  You should look
 though this file for places to add tests.
 
-YOUR NAME(S) AND NETID(S) HERE
-DATE COMPLETED HERE
+Oscar So (ons4) & Jee-In Lee (jl3697)
+Sep 30, 2019
 """
 import introcs
 import a2
@@ -16,9 +16,9 @@ def test_complement():
     Test function complement
     """
     introcs.assert_equals(introcs.RGB(255-250, 255-0, 255-71),
-                          a2.complement_rgb(introcs.RGB(250, 0, 71)))
+                a2.complement_rgb(introcs.RGB(250, 0, 71)))
     introcs.assert_equals(introcs.RGB(255-92, 255-128, 255-255),
-                          a2.complement_rgb(introcs.RGB(92, 128, 255)))
+                a2.complement_rgb(introcs.RGB(92, 128, 255)))
 
     # Make sure we are not modifying the color
     rgb = introcs.RGB(128, 128, 128)
@@ -88,19 +88,19 @@ def test_str5_color():
     Test the str5 functions for cmyk and hsv.
     """
     introcs.assert_equals('(98.45, 25.36, 72.80, 1.000)',
-                          a2.str5_cmyk(introcs.CMYK(98.448, 25.362, 72.8, 1.0)))
+                a2.str5_cmyk(introcs.CMYK(98.448, 25.362, 72.8, 1.0)))
     introcs.assert_equals('(76.86, 0.000, 9.429, 100.0)',
-                          a2.str5_cmyk(introcs.CMYK(76.858, 0.000, 9.42885, 100.0)))
+                a2.str5_cmyk(introcs.CMYK(76.858, 0.000, 9.42885, 100.0)))
 
     # Tests for str5_hsv (add two)
     introcs.assert_equals('(0.000, 1.000, 0.500)',
-                          a2.str5_hsv(introcs.HSV(0.0, 1.0, 0.5)))
+                a2.str5_hsv(introcs.HSV(0.0, 1.0, 0.5)))
     introcs.assert_equals('(0.000, 0.314, 1.000)',
-                          a2.str5_hsv(introcs.HSV(0.0, 0.313725490196, 1.0)))
+                a2.str5_hsv(introcs.HSV(0.0, 0.313725490196, 1.0)))
     introcs.assert_equals('(12.00, 0.468, 0.325)',
-                          a2.str5_hsv(introcs.HSV(12, 0.46792, 0.32456)))
+                a2.str5_hsv(introcs.HSV(12, 0.46792, 0.32456)))
     introcs.assert_equals('(225.3, 0.151, 0.786)',
-                          a2.str5_hsv(introcs.HSV(225.298, 0.1512256, 0.78610)))
+                a2.str5_hsv(introcs.HSV(225.298, 0.1512256, 0.78610)))
 
 
 def test_rgb_to_cmyk():
