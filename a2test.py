@@ -147,21 +147,93 @@ def test_cmyk_to_rgb():
     """
     Test translation function cmyk_to_rgb
     """
-    pass  # ADD TESTS TO ME
+    cmyk = introcs.CMYK(0.000, 100.0, 100.0, 0.000);
+    rgb = a2.cmyk_to_rgb(cmyk);
+    introcs.assert_equals('0.000', a2.str5(rgb.blue))
+    introcs.assert_equals('255.0', a2.str5(rgb.red))
+    introcs.assert_equals('0.000', a2.str5(rgb.green))
+    
+    cmyk = introcs.CMYK(88.44, 76.99, 5.528, 21.96);
+    rgb = a2.cmyk_to_rgb(cmyk);
+    introcs.assert_equals('188.0', a2.str5(rgb.blue))
+    introcs.assert_equals('46.00', a2.str5(rgb.green))
+    introcs.assert_equals('23.00', a2.str5(rgb.red))
+    
+    cmyk = introcs.CMYK(46.98, 55.10, 100.0, 2.122);
+    rgb = a2.cmyk_to_rgb(cmyk);
+    introcs.assert_equals('0.000', a2.str5(rgb.blue))
+    introcs.assert_equals('112.0', a2.str5(rgb.green))
+    introcs.assert_equals('132.0', a2.str5(rgb.red))
 
 
 def test_rgb_to_hsv():
     """
     Test translation function rgb_to_hsv
     """
-    pass  # ADD TESTS TO ME
+    rgb = introcs.RGB(255, 255, 255);
+    hsv = a2.rgb_to_hsv(rgb);
+    introcs.assert_equals('0.000', a2.str5(hsv.hue))
+    introcs.assert_equals('0.000', a2.str5(hsv.saturation))
+    introcs.assert_equals('1.000', a2.str5(hsv.value))
+    
+    rgb = introcs.RGB(62, 7, 7);
+    hsv = a2.rgb_to_hsv(rgb);
+    introcs.assert_equals('0.000', a2.str5(hsv.hue))
+    introcs.assert_equals('0.887', a2.str5(hsv.saturation))
+    introcs.assert_equals('0.243', a2.str5(hsv.value))
+    
+    rgb = introcs.RGB(188, 56, 9);
+    hsv = a2.rgb_to_hsv(rgb);
+    introcs.assert_equals('15.75', a2.str5(hsv.hue))
+    introcs.assert_equals('0.952', a2.str5(hsv.saturation))
+    introcs.assert_equals('0.737', a2.str5(hsv.value))
+    
+    rgb = introcs.RGB(6, 2, 8);
+    hsv = a2.rgb_to_hsv(rgb);
+    introcs.assert_equals('280.0', a2.str5(hsv.hue))
+    introcs.assert_equals('0.750', a2.str5(hsv.saturation))
+    introcs.assert_equals('0.031', a2.str5(hsv.value))  
 
+    rgb = introcs.RGB(24, 178, 88);
+    hsv = a2.rgb_to_hsv(rgb);
+    introcs.assert_equals('144.9', a2.str5(hsv.hue))
+    introcs.assert_equals('0.865', a2.str5(hsv.saturation))
+    introcs.assert_equals('0.698', a2.str5(hsv.value))
+    
 
 def test_hsv_to_rgb():
     """
     Test translation function hsv_to_rgb
     """
-    pass  # ADD TESTS TO ME
+    hsv = introcs.HSV(178, 0.999, 0.001);
+    rgb = a2.hsv_to_rgb(hsv);
+    introcs.assert_equals('0.000', a2.str5(rgb.red))
+    introcs.assert_equals('0.000', a2.str5(rgb.green))
+    introcs.assert_equals('0.000', a2.str5(rgb.blue))
+    
+    hsv = introcs.HSV(77.23, 0.652, 0.148);
+    rgb = a2.hsv_to_rgb(hsv);
+    introcs.assert_equals('38.00', a2.str5(rgb.green))
+    introcs.assert_equals('31.00', a2.str5(rgb.red))
+    introcs.assert_equals('13.00', a2.str5(rgb.blue))
+    
+    hsv = introcs.HSV(0.000, 1.000, 0.765);
+    rgb = a2.hsv_to_rgb(hsv);
+    introcs.assert_equals('0.000', a2.str5(rgb.green))
+    introcs.assert_equals('0.000', a2.str5(rgb.blue))    
+    introcs.assert_equals('195.0', a2.str5(rgb.red))
+
+    hsv = introcs.HSV(240.1, 0.366, 0.771);
+    rgb = a2.hsv_to_rgb(hsv);
+    introcs.assert_equals('125.0', a2.str5(rgb.red))
+    introcs.assert_equals('125.0', a2.str5(rgb.green))
+    introcs.assert_equals('197.0', a2.str5(rgb.blue))
+
+    hsv = introcs.HSV(222.8, 1.000, 0.521);
+    rgb = a2.hsv_to_rgb(hsv);
+    introcs.assert_equals('0.000', a2.str5(rgb.red))
+    introcs.assert_equals('38.00', a2.str5(rgb.green))
+    introcs.assert_equals('133.0', a2.str5(rgb.blue))
 
 
 def test_to_float_list():
